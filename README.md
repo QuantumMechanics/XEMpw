@@ -10,7 +10,7 @@ See it live <a href="https://www.krakenlabs.org/XEMpw.php" target="_blank">here<
 #How to 
 
 Start by including the required PHP class provided by php2nem in your page
-'''
+
 <?
 #include the required class
 require_once 'pathto/NEM.php';
@@ -22,4 +22,4 @@ $conf = array('nis_address' => 'go.nem.ninja');
 
 #create an instance using a user defined configuration options
 $nem = new NEM($conf);
-'''
+
