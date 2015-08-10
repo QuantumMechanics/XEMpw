@@ -57,13 +57,14 @@
 	$str = $decodenewaddress->address;
 	#Every 4 chars we want a space
 	$token = chunk_split($str,4,' ');
-	 #Every 10 chars we want "\n"
+	#Every 10 chars we want "\n"
 	$separate= chunk_split($token,10,'\n');
 
 	#XEM private key
 	$strpk = $decodenewaddress->privateKey;
 	#Every 4 chars we want a space
 	$tokenpk = chunk_split($strpk,4,' ');
+	#Every 10 chars we want "\n"
 	$separatepk= chunk_split($tokenpk,10,'\n');
 	?>
 
@@ -88,12 +89,15 @@
 	var c = document.getElementById("myCanvas");
 	var ctx = c.getContext("2d");
 
-	var background = new Image(); //ajout load background fonction
+	//Background parameters
+	var background = new Image();
+	   //Below you define your background image (need to be same size as canvas)
 	    background.src = 'images/nempaper.png';
+	    //Background load function to insure we do not generate with no background
 	    background.addEventListener('load', function() {
 		ctx.drawImage(background, 0, 0);
 	    
-
+	//Here is the splitting process for the address
 	function fillTextMultiLine(ctx, text, x, y) {
 	  var lineHeight = ctx.measureText("<? echo substr_replace($separate ,"",-3) ?>").width * 0.05;
 	  var lines = text.split("\n");
@@ -103,10 +107,13 @@
 	  }
 	}
 
+	//Writing address in canvas
 	ctx.fillStyle = "#444";
 	ctx.font = "bold 11pt Arial";
+	//85 and 195 are text x and y position
 	fillTextMultiLine(ctx,"<? echo substr_replace($separate ,"",-3) ?>",200, 75);
 
+	//Here is the splitting process for the private key
 	function fillTextMultiLinepk(ctx, text, x, y) {
 	  var lineHeight = ctx.measureText("<? echo substr_replace($separatepk ,"",-3) ?>").width * 0.028;
 	  var lines = text.split("\n");
@@ -116,11 +123,13 @@
 	  }
 	}
 
+	//Writing private key in canvas
 	ctx.fillStyle = "#D5A51B";
 	ctx.font = "bold 11pt Arial";
+	//420 and 75 are text x and y position
 	fillTextMultiLinepk(ctx,"<? echo substr_replace($separatepk ,"",-3) ?>",370, 75);
 
-	}, false); //ajout load background fonction
+	}, false); //end background load function
 
 	 function printCanvas2()  
 	{  
