@@ -11,8 +11,8 @@
 		<meta name="author" content="Quantum_Mechanics" />
 		<link rel="shortcut icon" href="../favicon.ico">
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-		<script type="text/javascript" src="js/jquery.qrcode.js"></script>
-		<script type="text/javascript" src="js/qrcode.js"></script>
+		<script type="text/javascript" src="vendors/js/jquery.qrcode.js"></script>
+		<script type="text/javascript" src="vendors/js/qrcode.js"></script>
 	</head>
 	<body>
 		<div class="container">
