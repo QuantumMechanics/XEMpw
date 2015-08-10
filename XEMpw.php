@@ -181,7 +181,7 @@
 
 		</div><!-- /container -->
 		<br><br>
-		<center><footer class="text-center"><b>Donation:</b> 1BRuxYZ3ohDJkfEWKVMWAiYrAYjwNSaPJs</footer></center>		
+		<center><footer><b>BTC:</b> 1BRuxYZ3ohDJkfEWKVMWAiYrAYjwNSaPJs<br><b>XEM:</b> NAMOAV-HFVPJ6-FP32YP-2GCM64-WSRMKX-A5KKYW-WHPY</footer></center>		
 
 
 	</body>
