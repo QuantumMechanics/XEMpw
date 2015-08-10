@@ -38,6 +38,7 @@
 	  //decoding the above JSON string
 	  $json=json_decode($res);
 	 
+	 #Monitoring connection
 	 if ($json->message == 'ok'){
 		echo '<center><b>CONNECTED TO: <span style="color:green;">'.$opt."</span></b><br>";
 		echo '<b>NIS STATUT: <span style="color:green;">OK</span></b></div></center>';
