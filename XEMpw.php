@@ -24,6 +24,7 @@
 
 			#define the initial configuration parameters
 			#if not defined the defaults will be used
+			#We set a trusted node as remote NIS but you can use local NIS too
 			$conf = array('nis_address' => 'go.nem.ninja');
 
 			#create an instance using a user defined configuration options
@@ -37,6 +38,7 @@
 	  //decoding the above JSON string
 	  $json=json_decode($res);
 	 
+	 #Monitoring connection
 	 if ($json->message == 'ok'){
 		echo '<center><b>CONNECTED TO: <span style="color:green;">'.$opt."</span></b><br>";
 		echo '<b>NIS STATUT: <span style="color:green;">OK</span></b></div></center>';
@@ -51,18 +53,20 @@
 
 	$newaddress = $nem->nis_get('/account/generate');
 	$decodenewaddress=json_decode($newaddress);
-
+	
+	#XEM address
 	$str = $decodenewaddress->address;
+	#Every 4 chars we want a space
 	$token = chunk_split($str,4,' ');
+	#Every 10 chars we want "\n"
 	$separate= chunk_split($token,10,'\n');
-	$token2 = chunk_split($str,6,' ');
-	$separate2= chunk_split($token2,14,'\n');
 
+	#XEM private key
 	$strpk = $decodenewaddress->privateKey;
+	#Every 4 chars we want a space
 	$tokenpk = chunk_split($strpk,4,' ');
+	#Every 10 chars we want "\n"
 	$separatepk= chunk_split($tokenpk,10,'\n');
-	$separatepk2= chunk_split($strpk,4,'\n');
-
 	?>
 
 	<br>
@@ -86,12 +90,15 @@
 	var c = document.getElementById("myCanvas");
 	var ctx = c.getContext("2d");
 
-	var background = new Image(); //ajout load background fonction
+	//Background parameters
+	var background = new Image();
+	   //Below you define your background image (need to be same size as canvas)
 	    background.src = 'images/nempaper.png';
+	    //Background load function to insure we do not generate with no background
 	    background.addEventListener('load', function() {
 		ctx.drawImage(background, 0, 0);
 	    
-
+	//Here is the splitting process for the address
 	function fillTextMultiLine(ctx, text, x, y) {
 	  var lineHeight = ctx.measureText("<? echo substr_replace($separate ,"",-3) ?>").width * 0.05;
 	  var lines = text.split("\n");
@@ -101,10 +108,13 @@
 	  }
 	}
 
+	//Writing address in canvas
 	ctx.fillStyle = "#444";
 	ctx.font = "bold 11pt Arial";
+	//85 and 195 are text x and y position
 	fillTextMultiLine(ctx,"<? echo substr_replace($separate ,"",-3) ?>",200, 75);
 
+	//Here is the splitting process for the private key
 	function fillTextMultiLinepk(ctx, text, x, y) {
 	  var lineHeight = ctx.measureText("<? echo substr_replace($separatepk ,"",-3) ?>").width * 0.028;
 	  var lines = text.split("\n");
@@ -114,15 +124,17 @@
 	  }
 	}
 
+	//Writing private key in canvas
 	ctx.fillStyle = "#D5A51B";
 	ctx.font = "bold 11pt Arial";
+	//420 and 75 are text x and y position
 	fillTextMultiLinepk(ctx,"<? echo substr_replace($separatepk ,"",-3) ?>",370, 75);
 
-	}, false); //ajout load background fonction
+	}, false); //end background load function
 
 	 function printCanvas2()  
 	{  
-	    var dataUrl = document.getElementById('myCanvas').toDataURL(); //attempt to save base64 string to server using this var  
+	    var dataUrl = document.getElementById('myCanvas').toDataURL();
 	    var windowContent = '<!DOCTYPE html>';
 	    windowContent += '<html>'
 	    windowContent += '<head><title>Print canvas</title></head>';
@@ -169,7 +181,7 @@
 
 		</div><!-- /container -->
 		<br><br>
-		<center><footer class="text-center"><b>Donation:</b> 1BRuxYZ3ohDJkfEWKVMWAiYrAYjwNSaPJs</footer></center>		
+		<center><footer><b>BTC:</b> 1BRuxYZ3ohDJkfEWKVMWAiYrAYjwNSaPJs<br><b>XEM:</b> NAMOAV-HFVPJ6-FP32YP-2GCM64-WSRMKX-A5KKYW-WHPY</footer></center>		
 
 
 	</body>
