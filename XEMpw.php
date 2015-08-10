@@ -24,6 +24,7 @@
 
 			#define the initial configuration parameters
 			#if not defined the defaults will be used
+			#We set a trusted node as remote NIS but you can use local NIS too
 			$conf = array('nis_address' => 'go.nem.ninja');
 
 			#create an instance using a user defined configuration options
@@ -51,18 +52,19 @@
 
 	$newaddress = $nem->nis_get('/account/generate');
 	$decodenewaddress=json_decode($newaddress);
-
+	
+	#XEM address
 	$str = $decodenewaddress->address;
+	#Every 4 chars we want a space
 	$token = chunk_split($str,4,' ');
+	 #Every 10 chars we want "\n"
 	$separate= chunk_split($token,10,'\n');
-	$token2 = chunk_split($str,6,' ');
-	$separate2= chunk_split($token2,14,'\n');
 
+	#XEM private key
 	$strpk = $decodenewaddress->privateKey;
+	#Every 4 chars we want a space
 	$tokenpk = chunk_split($strpk,4,' ');
 	$separatepk= chunk_split($tokenpk,10,'\n');
-	$separatepk2= chunk_split($strpk,4,'\n');
-
 	?>
 
 	<br>
@@ -122,7 +124,7 @@
 
 	 function printCanvas2()  
 	{  
-	    var dataUrl = document.getElementById('myCanvas').toDataURL(); //attempt to save base64 string to server using this var  
+	    var dataUrl = document.getElementById('myCanvas').toDataURL();
 	    var windowContent = '<!DOCTYPE html>';
 	    windowContent += '<html>'
 	    windowContent += '<head><title>Print canvas</title></head>';
